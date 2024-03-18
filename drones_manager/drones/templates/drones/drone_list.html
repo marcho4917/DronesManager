@@ -1,0 +1,39 @@
+{% extends 'drones/home.html' %}
+{% block content %}
+<div class="container drones-container">
+    <div class="row form-window justify-content-center align-items-center">
+        <h2>Drone Fleet Monitoring</h2>
+        <form action="{% url 'add_drone' %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-dark w-100 mt-3 mb-3 ml-3">Add new drone +</button>
+        </form>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Battery Level</th>
+                <th>Current Location</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for drone in drones %}
+            <tr>
+                <td>{{ drone.name }}</td>
+                <td>{{ drone.status }}</td>
+                <td>{{ drone.battery_level }}%</td>
+                <td>{{ drone.current_location }}</td>
+                <td>
+                    <form action="{% url 'delete_drone' drone.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Delete drone</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

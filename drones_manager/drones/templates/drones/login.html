@@ -1,0 +1,17 @@
+{% extends 'drones/home.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+    <div class="row form-row justify-content-center align-items-center">
+        <div class="col-md-6 form-window">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    {{ form|crispy }}
+                </fieldset>
+                <button type="submit" class="btn btn-dark w-100">Log in</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
